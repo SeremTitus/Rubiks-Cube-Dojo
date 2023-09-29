@@ -7,7 +7,7 @@ Welcome to the Rubik's Cube Dojo Simulator! This simulator allows you to solve, 
 ## Contribution guidelines
 - Project is currently on Godot 4.1.1 stable
 - Project rendering method must remain on gl_compatability
-- Blend files([Blender 3D](https://blender.org)) must remain in Blender 2.93.0
+- Blend files([Blender 3D](https://blender.org)) must remain on Blender 2.93.0
 
 Happy cubing! 🧡🌟
 
