@@ -1,6 +1,6 @@
 extends Control
 
-@onready var RubicsCube =%RubicsCube
+@onready var RubicsCube =%RubiksCube
 var left_click_hold_start:Vector2
 
 var speedUpForXTurns:int = -1 #used to randomize in max speed
