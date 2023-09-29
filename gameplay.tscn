@@ -1,0 +1,207 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwnun2cbwgjbq"]
+
+[ext_resource type="Script" path="res://gameplay.gd" id="1_u7leh"]
+[ext_resource type="PackedScene" uid="uid://dt6fjh3iu8f4j" path="res://RubiksCube_3x3.tscn" id="2_mqq3r"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tv4tq"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_02lia"]
+sky_material = SubResource("ProceduralSkyMaterial_tv4tq")
+
+[sub_resource type="Environment" id="Environment_ndbx5"]
+sky = SubResource("Sky_02lia")
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2
+tonemap_mode = 2
+
+[node name="Gameplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u7leh")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ndbx5")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0.455245, -0.4761, 0.752384, -0.206767, 0.765395, 0.609441, 1.19209e-07, 0, 0)
+shadow_enabled = true
+metadata/_edit_lock_ = true
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.679441, -0.322797, 0.65891, 0, 0.898027, 0.439939, -0.73373, -0.298913, 0.610157, 3.3, 2.5, 3)
+current = true
+metadata/_edit_lock_ = true
+
+[node name="RotationBody" type="Node3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29, 0.45, 0.94)
+
+[node name="RubiksCube" parent="RotationBody" instance=ExtResource("2_mqq3r")]
+unique_name_in_owner = true
+moves = []
+
+[node name="UI" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="UI"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+
+[node name="SpeedDisplay" type="RichTextLabel" parent="UI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+bbcode_enabled = true
+text = "SPEED"
+fit_content = true
+autowrap_mode = 0
+
+[node name="Speed" type="HSlider" parent="UI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+max_value = 4.0
+value = 1.0
+tick_count = 4
+ticks_on_borders = true
+
+[node name="HideBeforeRandomize" type="CheckButton" parent="UI/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Hide before Randomize"
+alignment = 2
+
+[node name="DeactivateRandom" type="CheckButton" parent="UI/HBoxContainer"]
+layout_mode = 2
+text = "Deactivate Random"
+alignment = 2
+
+[node name="DeactivateReset" type="CheckButton" parent="UI/HBoxContainer"]
+layout_mode = 2
+text = "Deactivate Reset"
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HBoxContainer"]
+layout_direction = 1
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Randomize" type="Button" parent="UI/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+text = "Random"
+
+[node name="Reset" type="Button" parent="UI/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+toggle_mode = true
+text = "Reset"
+
+[node name="Control" type="Control" parent="UI/HBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+columns = 6
+
+[node name="R_Button" type="Button" parent="UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+toggle_mode = true
+text = "R"
+
+[node name="L_Button" type="Button" parent="UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "L"
+
+[node name="U_Button" type="Button" parent="UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "U"
+
+[node name="D_Button" type="Button" parent="UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "D"
+
+[node name="F_Button" type="Button" parent="UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "F"
+
+[node name="B_Button" type="Button" parent="UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "B"
+
+[node name="R\'_Button" type="Button" parent="UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "R'"
+
+[node name="L\'_Button" type="Button" parent="UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "L'"
+
+[node name="U\'_Button" type="Button" parent="UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "U'"
+
+[node name="D\'_Button" type="Button" parent="UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "D'"
+
+[node name="F\'_Button" type="Button" parent="UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "F'"
+
+[node name="B\'_Button" type="Button" parent="UI/HBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 60
+text = "B'"
+
+[node name="PlayerInstructions" type="RichTextLabel" parent="UI/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.729412, 0.729412, 0.729412, 0.517647)
+theme_override_font_sizes/normal_font_size = 10
+text = "Click key related to Notation(R) as Shortcut.For Prime (R') hold shift before
+Hold down LEFT Click and MOVE Cursor to see all side (Working progress)
+Click O key to return to origin"
+fit_content = true
+
+[connection signal="value_changed" from="UI/HBoxContainer/Speed" to="." method="set_speed"]
+[connection signal="toggled" from="UI/HBoxContainer/DeactivateRandom" to="UI/HBoxContainer/HBoxContainer/Randomize" method="set_disabled"]
+[connection signal="toggled" from="UI/HBoxContainer/DeactivateReset" to="UI/HBoxContainer/HBoxContainer/Reset" method="set_disabled"]
+[connection signal="button_down" from="UI/HBoxContainer/HBoxContainer/Randomize" to="." method="randomizeRubiks"]
+[connection signal="button_down" from="UI/HBoxContainer/HBoxContainer/Reset" to="." method="_on_reset_button_down"]
+[connection signal="button_down" from="UI/HBoxContainer/GridContainer/R_Button" to="." method="appendMoveToRubiks" binds= ["R"]]
+[connection signal="button_down" from="UI/HBoxContainer/GridContainer/L_Button" to="." method="appendMoveToRubiks" binds= ["L"]]
+[connection signal="button_down" from="UI/HBoxContainer/GridContainer/U_Button" to="." method="appendMoveToRubiks" binds= ["U"]]
+[connection signal="button_down" from="UI/HBoxContainer/GridContainer/D_Button" to="." method="appendMoveToRubiks" binds= ["D"]]
+[connection signal="button_down" from="UI/HBoxContainer/GridContainer/F_Button" to="." method="appendMoveToRubiks" binds= ["F"]]
+[connection signal="button_down" from="UI/HBoxContainer/GridContainer/B_Button" to="." method="appendMoveToRubiks" binds= ["B"]]
+[connection signal="button_down" from="UI/HBoxContainer/GridContainer/R'_Button" to="." method="appendMoveToRubiks" binds= ["R'"]]
+[connection signal="button_down" from="UI/HBoxContainer/GridContainer/L'_Button" to="." method="appendMoveToRubiks" binds= ["L'"]]
+[connection signal="button_down" from="UI/HBoxContainer/GridContainer/U'_Button" to="." method="appendMoveToRubiks" binds= ["U'"]]
+[connection signal="button_down" from="UI/HBoxContainer/GridContainer/D'_Button" to="." method="appendMoveToRubiks" binds= ["D'"]]
+[connection signal="button_down" from="UI/HBoxContainer/GridContainer/F'_Button" to="." method="appendMoveToRubiks" binds= ["F'"]]
+[connection signal="button_down" from="UI/HBoxContainer/GridContainer/B'_Button" to="." method="appendMoveToRubiks" binds= ["B'"]]

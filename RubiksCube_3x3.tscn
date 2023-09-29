@@ -1,0 +1,207 @@
+[gd_scene load_steps=4 format=3 uid="uid://dt6fjh3iu8f4j"]
+
+[ext_resource type="Script" path="res://RubiksCube_3x3.gd" id="1_y04fe"]
+[ext_resource type="PackedScene" uid="uid://bxlj8uinlb0cd" path="res://cube.tscn" id="2_7gtyj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cu7u8"]
+size = Vector3(3, 1, 3)
+
+[node name="RubiksCube" type="Node3D"]
+script = ExtResource("1_y04fe")
+moves = ["R", "L", "U", "D", "F", "B", "B'", "F'", "D'", "U'", "L'", "R'"]
+
+[node name="Display" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -15.0
+offset_right = 15.0
+offset_bottom = 65.0
+grow_horizontal = 2
+
+[node name="MovesLabel" type="RichTextLabel" parent="Display"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/default_color = Color(0.352941, 0.788235, 0.0784314, 1)
+theme_override_font_sizes/normal_font_size = 47
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+
+[node name="Pivots" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="BasePivot" type="PinJoint3D" parent="Pivots"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -1, 0)
+
+[node name="TopPivot" type="PinJoint3D" parent="Pivots"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, 0, 1, 0)
+
+[node name="LeftPivot" type="PinJoint3D" parent="Pivots"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="RightPivot" type="PinJoint3D" parent="Pivots"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="FrontPivot" type="PinJoint3D" parent="Pivots"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="BackPivot" type="PinJoint3D" parent="Pivots"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="AnimatePivot" type="AnimationPlayer" parent="Pivots"]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+reset_on_save = false
+
+[node name="Detectors" type="Node3D" parent="."]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="BaseDetect" type="Area3D" parent="Detectors"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detectors/BaseDetect"]
+shape = SubResource("BoxShape3D_cu7u8")
+
+[node name="TopDetect" type="Area3D" parent="Detectors"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detectors/TopDetect"]
+shape = SubResource("BoxShape3D_cu7u8")
+
+[node name="LeftDetect" type="Area3D" parent="Detectors"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1, 0, 0)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detectors/LeftDetect"]
+shape = SubResource("BoxShape3D_cu7u8")
+
+[node name="RightDetect" type="Area3D" parent="Detectors"]
+unique_name_in_owner = true
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 1, 0, 0)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detectors/RightDetect"]
+shape = SubResource("BoxShape3D_cu7u8")
+
+[node name="FrontDetect" type="Area3D" parent="Detectors"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 1)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detectors/FrontDetect"]
+shape = SubResource("BoxShape3D_cu7u8")
+
+[node name="BackDetect" type="Area3D" parent="Detectors"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1)
+collision_layer = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detectors/BackDetect"]
+shape = SubResource("BoxShape3D_cu7u8")
+
+[node name="TempCubes" type="Node3D" parent="."]
+unique_name_in_owner = true
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Top" type="Node3D" parent="TempCubes"]
+
+[node name="Cube" parent="TempCubes/Top" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+
+[node name="Cube2" parent="TempCubes/Top" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 1)
+
+[node name="Cube3" parent="TempCubes/Top" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 1)
+
+[node name="Cube4" parent="TempCubes/Top" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0)
+
+[node name="Cube5" parent="TempCubes/Top" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Cube6" parent="TempCubes/Top" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, 0)
+
+[node name="Cube7" parent="TempCubes/Top" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -1)
+
+[node name="Cube8" parent="TempCubes/Top" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+
+[node name="Cube9" parent="TempCubes/Top" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -1)
+
+[node name="Center" type="Node3D" parent="TempCubes"]
+
+[node name="Cube" parent="TempCubes/Center" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="Cube2" parent="TempCubes/Center" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+
+[node name="Cube3" parent="TempCubes/Center" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="Cube4" parent="TempCubes/Center" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Cube6" parent="TempCubes/Center" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="Cube7" parent="TempCubes/Center" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
+
+[node name="Cube8" parent="TempCubes/Center" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Cube9" parent="TempCubes/Center" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+
+[node name="Base" type="Node3D" parent="TempCubes"]
+transform = Transform3D(1, 0, 3.57628e-06, 0, 1, 0, -3.57628e-06, 0, 1, 0, 0, 0)
+
+[node name="Cube" parent="TempCubes/Base" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 1)
+
+[node name="Cube2" parent="TempCubes/Base" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 1)
+
+[node name="Cube3" parent="TempCubes/Base" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 1)
+
+[node name="Cube4" parent="TempCubes/Base" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 0)
+
+[node name="Cube5" parent="TempCubes/Base" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="Cube6" parent="TempCubes/Base" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, 0)
+
+[node name="Cube7" parent="TempCubes/Base" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, -1)
+
+[node name="Cube8" parent="TempCubes/Base" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -1)
+
+[node name="Cube9" parent="TempCubes/Base" instance=ExtResource("2_7gtyj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, -1, -1)
+
+[connection signal="animation_finished" from="Pivots/AnimatePivot" to="." method="_on_animate_pivot_animation_finished"]

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bxlj8uinlb0cd"]
+
+[ext_resource type="Script" path="res://cube.gd" id="1_jv0mh"]
+[ext_resource type="PackedScene" uid="uid://d0wm0fyxi6o68" path="res://singleCubeForRubik'sCube.glb" id="2_nb6ej"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fb2eq"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[node name="Cube" type="Node3D"]
+script = ExtResource("1_jv0mh")
+
+[node name="CubeDetector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CubeDetector"]
+shape = SubResource("BoxShape3D_fb2eq")
+
+[node name="Mesh" parent="." instance=ExtResource("2_nb6ej")]
