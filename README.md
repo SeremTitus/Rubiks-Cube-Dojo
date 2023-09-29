@@ -10,3 +10,5 @@ Project rendering method must remain on gl_compatability
 Blend files([Blender 3D](https://blender.org)) must remain in Blender 2.93.0
 
 Happy cubing! 🧡🌟
+
+ Application Icon used is Attributed to <a href="https://www.flaticon.com/free-icons/rubik" title="Rubik icons">Rubik icons created by Freepik - Flaticon</a>

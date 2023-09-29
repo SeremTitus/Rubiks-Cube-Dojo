@@ -13,7 +13,9 @@ config_version=5
 config/name="Rubik's_Cube_Dojo"
 run/main_scene="res://gameplay.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://icons/Original_rubik_App_icon.png"
+config/macos_native_icon="res://icons/AppIcons/rubik_App_icon.icns"
+config/windows_native_icon="res://icons/AppIcons/rubik_App_icon.ico"
 
 [editor]
 
